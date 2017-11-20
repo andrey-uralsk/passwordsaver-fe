@@ -5,6 +5,7 @@ import '@angular/core';
 import '@angular/common';
 import '@angular/http';
 import '@angular/router';
+import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
 // RxJS
 import 'rxjs';

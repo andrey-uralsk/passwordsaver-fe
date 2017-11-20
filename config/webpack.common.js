@@ -34,15 +34,17 @@ module.exports = {
                 use: 'file-loader?name=assets/[name].[hash].[ext]'
             },
             {
+                test: /\.styl$/,
+                use: [
+                    'raw-loader', 'stylus-loader'
+                ]
+            }, {
                 test: /\.css$/,
-                exclude: helpers.root('src', 'app'),
-                use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader?sourceMap' })
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
             },
-            {
-                test: /\.css$/,
-                include: helpers.root('src', 'app'),
-                use: 'raw-loader'
-            }
         ]
     },
 
