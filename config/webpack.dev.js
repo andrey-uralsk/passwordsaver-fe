@@ -19,6 +19,13 @@ module.exports = webpackMerge(commonConfig, {
 
     devServer: {
         historyApiFallback: true,
-        stats: 'minimal'
+        stats: 'minimal',
+        proxy: {
+            '/auth': {
+                target: 'http://localhost:3000/auth',
+                secure: false,
+                changeOrigin: true
+            }
+        },
     }
 });

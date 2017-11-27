@@ -1,0 +1,45 @@
+
+<div class="container-fluid awesome-container" style="z-index: 1001; position: relative">
+    <div class="row awesome-header"></div>
+    <div class="row justify-content-center">
+        <div class="col-10 col-md-6 col-lg-4 col-xl-2 authtorization-form-container">
+            <div class="row logo-container">
+                <div class="col-12">
+                    <h2>Password Saver</h2>
+                </div>
+            </div>
+            <div class="row intro-text-container">
+                <div class="col-12">
+                    <span>Для входа в систему укажите имя пользователя и пароль</span>
+                </div>
+            </div>
+            <div class="row form-container">
+                <div class="col-12">
+                    <div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div>
+                                    <label>Login</label>
+                                    <input class="form-control input-text-field ng-untouched ng-pristine ng-valid" type="text" [(ngModel)]="user.email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div>
+                                    <label>Password</label>
+                                    <input class="form-control input-string-field ng-untouched ng-pristine ng-valid" type="password" [(ngModel)]="user.password">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row auth-button-container">
+                    <div class="col-12">
+                        <button class="btn" (click)="whenAuthButtonClick.next()">Авторизоватьс</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

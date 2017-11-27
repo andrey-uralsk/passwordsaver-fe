@@ -1,16 +1,25 @@
 import { NgModule } from '@angular/core';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { BrowserModule }  from '@angular/platform-browser';
-
 import {RootComponent} from "./components/root/root.component";
-import {TopNavBarComponent} from "./components/topNavBar/topNavBar.component";
+import {RouterModule} from "@angular/router";
+import {AuthorizationModule} from "./modules/authorization/authorization.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
     imports: [
-        BrowserModule
+        BrowserModule,
+        AuthorizationModule,
+        HttpClientModule,
+        RouterModule.forRoot([{
+            path: '',
+            loadChildren: './router/appRouting.module#AppRoutingModule'
+            }]
+        ),
+        NgbModule.forRoot()
     ],
     declarations: [
-        RootComponent,
-        TopNavBarComponent
+        RootComponent
     ],
     bootstrap: [ RootComponent ]
 })
