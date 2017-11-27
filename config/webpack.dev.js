@@ -22,7 +22,7 @@ module.exports = webpackMerge(commonConfig, {
         stats: 'minimal',
         proxy: {
             '/auth': {
-                target: 'http://localhost:3000/auth',
+                target: 'http://localhost:3000/auth/',
                 secure: false,
                 changeOrigin: true
             }
