@@ -9,13 +9,16 @@ class AuthorizationHttpHeadersInterceptor implements HttpInterceptor {
 
     public intercept(req: HttpRequest<any>, httpHandler: HttpHandler): Observable<HttpEvent<any>> {
         switch ( req.url ){
-            case '/auth/login':
+            case '/api/login':
                 return httpHandler.handle(req);
             default:
                 return Observable.of(req)
                     .withLatestFrom( this.authtorizationTokenManager.tokenStream )
-                    .map(([req, token]) => req.clone({headers: req.headers.set('Authorization', `Bearer ${token}`)}))
-                    .switchMap(req => httpHandler.handle(req));
+                    .map(([req, token]) => {
+                        const res = req.clone({headers: req.headers.set('Authorization', `Bearer ${token}`)});
+                        return res;
+                    })
+                    .switchMap(req => httpHandler.handle(req))
         }
     }
 }

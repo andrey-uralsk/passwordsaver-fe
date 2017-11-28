@@ -1,3 +1,6 @@
+import {IModel} from "../../../IModel/IModel";
+
 export interface IDataSourceReadRequest {
-    entity: string;
+    entityName: string;
+    model: IModel;
 }

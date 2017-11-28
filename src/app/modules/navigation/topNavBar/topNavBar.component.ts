@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import {AuthorizationTokenManager} from "../../authorization/authorizationToken.service";
 
 @Component({
     selector: 'top-nav-bar',
@@ -6,4 +7,10 @@ import {Component} from "@angular/core";
     styleUrls: ['./topNavBar.component.styl']
 })
 export class TopNavBarComponent {
+
+    constructor(private auth: AuthorizationTokenManager){}
+
+    public logout(): void{
+        this.auth.removeToken();
+    }
 }

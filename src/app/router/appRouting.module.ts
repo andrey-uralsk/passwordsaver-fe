@@ -7,10 +7,12 @@ import {LoginModule} from "./login/login.module";
 import {NavigationModule} from "../modules/navigation/navigation.module";
 import {AuthGuard} from "../modules/authorization/auth.guard";
 import {AuthorizationTokenManager} from "../modules/authorization/authorizationToken.service";
+import {AuthorizationModule} from "../modules/authorization/authorization.module";
 
 @NgModule({
     imports: [
         CommonModule,
+        AuthorizationModule,
         RouterModule.forChild([{
             path: '',
             redirectTo: 'app',
@@ -30,7 +32,7 @@ import {AuthorizationTokenManager} from "../modules/authorization/authorizationT
 export class AppRoutingModule {
 
     constructor(authToken: AuthorizationTokenManager, router: Router) {
-        authToken.isAuthorizate
+        authToken.isAuth
             .filter(next => !next)
             .do(next => {
                 router.navigate(['login'])

@@ -21,7 +21,7 @@ export class LoginComponent {
         private http: HttpClient,
         private authtorizationToken: AuthorizationTokenManager
     ) {
-        this.authtorizationToken.isAuthorizate
+        this.authtorizationToken.isAuth
             .filter(next => next)
             .first()
             .do(next => {
@@ -34,7 +34,7 @@ export class LoginComponent {
 
         this.whenAuthButtonClick
             .do(next => console.log(next))
-            .switchMap(next => this.http.post('/auth/login', {
+            .switchMap(next => this.http.post('/api/login', {
                 email: this.user.email,
                 password: this.user.password
             }))
