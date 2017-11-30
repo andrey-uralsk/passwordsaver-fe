@@ -6,5 +6,4 @@ require('./static/css/styles.css');
 if (process.env.ENV === 'production') {
     enableProdMode();
 }
-
 platformBrowserDynamic().bootstrapModule(AppModule);

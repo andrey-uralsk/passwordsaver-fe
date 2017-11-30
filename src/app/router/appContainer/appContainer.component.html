@@ -1,3 +1,7 @@
 <main>
     <top-nav-bar></top-nav-bar>
+    <div *ngFor="let project of projects">
+        <h1>{{project.name}}</h1>
+        <div>{{project.description}}</div>
+    </div>
 </main>

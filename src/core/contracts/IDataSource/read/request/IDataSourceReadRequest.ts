@@ -1,6 +1,10 @@
-import {IModel} from "../../../IModel/IModel";
+import {Model} from "../../../Models/Model";
+import {Type} from "@angular/core";
+import {HttpParams} from "@angular/common/http";
 
-export interface IDataSourceReadRequest {
-    entityName: string;
-    model: IModel;
+export interface IDataSourceReadRequest<T extends Model> {
+    model: Type<T>;
+    params?: {[param: string]: string | string[]};
+    limit?: number;
+    offset?: number;
 }
