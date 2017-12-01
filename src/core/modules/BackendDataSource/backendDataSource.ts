@@ -1,7 +1,7 @@
 import {IDataSource} from "../../contracts/IDataSource/IDataSource";
 import {IDataSourceReadRequest} from "../../contracts/IDataSource/read/request/IDataSourceReadRequest";
 import {Observable} from "rxjs/Observable";
-import {IDataSourceReadOneResponse} from "../../contracts/IDataSource/read/response/IDataSourceReadResponse";
+import {IDataSourceReadOneResponse} from "../../contracts/IDataSource/read/response/IDataSourceReadOneResponse";
 import {IDataSourceCreateResponse} from "../../contracts/IDataSource/create/response/IDataSourceCreateResponse";
 import {IDataSourceCreateRequest} from "../../contracts/IDataSource/create/request/IDataSourceCreateRequest";
 import {IDataSourceUpdateRequest} from "../../contracts/IDataSource/update/request/IDataSourceUpdateRequest";
@@ -33,11 +33,10 @@ export class BackendDataSource<T extends Model> implements IDataSource<Model> {
                 return what
             })
             .map(next => {
-                const data: T  = Object.assign({}, next) as T;
-                const response: IDataSourceReadOneResponse<T> = {
+                const data: T  = next['data'] as T;
+                return {
                     data: data
                 };
-                return response;
             })
     }
 
@@ -68,7 +67,7 @@ export class BackendDataSource<T extends Model> implements IDataSource<Model> {
 
     public update(updateRequest: IDataSourceUpdateRequest<T>): Observable<IDataSourceUpdateResponse<T>> {
         const updateResource: string = this.backendDataSourceMapping.dataSourceMap.get(updateRequest.model);
-        return this.http.post(updateResource, updateRequest.data)
+        return this.http.put(updateResource, updateRequest.data)
             .map(next => {
                 let data: T = next['data'];
                 return {
@@ -78,8 +77,8 @@ export class BackendDataSource<T extends Model> implements IDataSource<Model> {
     }
 
     public delete(deleteRequest: IDataSourceDeleteRequest<T>): Observable<IDataSourceDeleteResponse<T>> {
-        const updateResource: string = this.backendDataSourceMapping.dataSourceMap.get(deleteRequest.model);
-        return this.http.post(updateResource, deleteRequest.data)
+        const deleteResource: string = this.backendDataSourceMapping.dataSourceMap.get(deleteRequest.model);
+        return this.http.delete(deleteResource, deleteRequest.params)
             .map(next => {
                 let data: T = next['data'];
                 return {

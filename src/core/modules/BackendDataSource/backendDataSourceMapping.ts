@@ -8,7 +8,6 @@ export class BackendDataSourceMapping {
 
     constructor() {
         this.dataSourceMap = new Map<Type<Model>, string>([
-            [Model, '/api/'],
             [Project, '/projects']
         ]);
     }

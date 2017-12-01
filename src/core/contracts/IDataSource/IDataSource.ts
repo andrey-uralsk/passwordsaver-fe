@@ -1,6 +1,6 @@
 import {Observable} from "rxjs/Observable";
 import {Model} from "../Models/Model";
-import {IDataSourceReadOneResponse} from "./read/response/IDataSourceReadResponse";
+import {IDataSourceReadOneResponse} from "./read/response/IDataSourceReadOneResponse";
 import {IDataSourceReadRequest} from "./read/request/IDataSourceReadRequest";
 import {IDataSourceCreateRequest} from "./create/request/IDataSourceCreateRequest";
 import {IDataSourceCreateResponse} from "./create/response/IDataSourceCreateResponse";

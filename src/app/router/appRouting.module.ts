@@ -21,6 +21,9 @@ import {AuthorizationModule} from "../modules/authorization/authorization.module
             path: 'app',
             component: AppContainerComponent,
             canActivate: [AuthGuard],
+            children: [
+
+            ]
         }, {
             path: 'login',
             loadChildren: './login/login.module#LoginModule'
