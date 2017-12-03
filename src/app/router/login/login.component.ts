@@ -25,7 +25,7 @@ export class LoginComponent {
             .filter(next => next)
             .first()
             .do(next => {
-                router.navigate(['app'])
+                router.navigate(['app/projects'])
                     .then(sucess => sucess)
                     .catch(err => console.warn(err));
             })

@@ -4,16 +4,7 @@ import {Project} from "../../../core/contracts/Models/Project/Project";
 import {Observable} from "rxjs/Observable";
 
 @Component({
-    templateUrl: './appContainer.component.html'
+    templateUrl: './appContainer.component.html',
+    styleUrls: ['./appContainer.component.styl']
 })
-export class AppContainerComponent {
-    public projects: Project[] = [];
-    constructor(backend: BackendDataSource<Project>) {
-        backend.readMany({model: Project})
-            .subscribe(next => {
-                    this.projects = next.data;
-                },
-                error => console.log(error)
-            );
-    }
-}
+export class AppContainerComponent {}

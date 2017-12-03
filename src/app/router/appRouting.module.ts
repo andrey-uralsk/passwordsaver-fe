@@ -8,29 +8,40 @@ import {NavigationModule} from "../modules/navigation/navigation.module";
 import {AuthGuard} from "../modules/authorization/auth.guard";
 import {AuthorizationTokenManager} from "../modules/authorization/authorizationToken.service";
 import {AuthorizationModule} from "../modules/authorization/authorization.module";
+import {ProjectsComponent} from "./projects/projects.component";
+import {ProjectsModule} from "../modules/projects/projects.module";
 
 @NgModule({
     imports: [
         CommonModule,
         AuthorizationModule,
+        ProjectsModule,
         RouterModule.forChild([{
             path: '',
-            redirectTo: 'app',
+            redirectTo: 'app/projects',
             pathMatch: 'full'
         }, {
             path: 'app',
             component: AppContainerComponent,
             canActivate: [AuthGuard],
-            children: [
-
-            ]
+            children: [{
+                path: '',
+                redirectTo: 'projects',
+                pathMatch: 'full'
+            }, {
+                path: 'projects',
+                component: ProjectsComponent
+            }, {
+                path: 'passwords/:projectId',
+            }]
         }, {
             path: 'login',
             loadChildren: './login/login.module#LoginModule'
         }]),
         NavigationModule
     ],
-    declarations: [AppContainerComponent]
+    exports: [RouterModule],
+    declarations: [AppContainerComponent, ProjectsComponent]
 })
 export class AppRoutingModule {
 
