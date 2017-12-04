@@ -10,6 +10,7 @@ import {AuthorizationTokenManager} from "../modules/authorization/authorizationT
 import {AuthorizationModule} from "../modules/authorization/authorization.module";
 import {ProjectsComponent} from "./projects/projects.component";
 import {ProjectsModule} from "../modules/projects/projects.module";
+import {PasswordsComponent} from "./passwords/passwords.component";
 
 @NgModule({
     imports: [
@@ -33,6 +34,7 @@ import {ProjectsModule} from "../modules/projects/projects.module";
                 component: ProjectsComponent
             }, {
                 path: 'passwords/:projectId',
+                component: PasswordsComponent,
             }]
         }, {
             path: 'login',
@@ -41,7 +43,7 @@ import {ProjectsModule} from "../modules/projects/projects.module";
         NavigationModule
     ],
     exports: [RouterModule],
-    declarations: [AppContainerComponent, ProjectsComponent]
+    declarations: [AppContainerComponent, ProjectsComponent, PasswordsComponent]
 })
 export class AppRoutingModule {
 
