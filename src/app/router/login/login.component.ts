@@ -14,6 +14,7 @@ interface User {
 })
 export class LoginComponent {
     public user: User = {email: '', password: ''};
+    public errorText: string;
     public whenAuthButtonClick: Subject<undefined> = new Subject();
 
     constructor(
@@ -44,6 +45,7 @@ export class LoginComponent {
                         console.warn(`authenticate error: ${err.json()['responseStatus']['message']}`);
                         break;
                     default:
+                        this.errorText = 'Authorization error';
                         console.warn(`unknow authenticate error status ${err.status}`);
                 }
                 return what;

@@ -25,9 +25,13 @@ export class BackendDataSource<T extends Model> implements IDataSource<Model> {
 
     public readOne(readRequest: IDataSourceReadRequest<T>): Observable<IDataSourceReadOneResponse<T>> {
         const readResource: string = this.backendDataSourceMapping.dataSourceMap.get(readRequest.model);
+        let params = new HttpParams();
+        for(let param in readRequest.params) {
+            params = params.append(param, readRequest.params[param]);
+        }
         return this.http
             .get(`${this.backendPrefix}${readResource}`,
-                {params: new HttpParams(readRequest.params)}
+                {params: params}
             )
             .catch((err, what) => {
                 return what
@@ -42,9 +46,13 @@ export class BackendDataSource<T extends Model> implements IDataSource<Model> {
 
     public readMany(readRequest: IDataSourceReadRequest<T>): Observable<IDataSourceReadManyResponse<T>> {
         const readResource: string = this.backendDataSourceMapping.dataSourceMap.get(readRequest.model);
+        let params = new HttpParams();
+        for(let param in readRequest.params) {
+            params = params.append(param, readRequest.params[param]);
+        }
         return this.http
             .get(`${this.backendPrefix}${readResource}`,
-                {params: new HttpParams(readRequest.params)}
+                {params: params}
             )
             .map(next => {
                 let data: T[]  = next['data'];

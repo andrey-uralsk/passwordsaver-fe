@@ -1,6 +1,5 @@
 
 <div class="container-fluid awesome-container" style="z-index: 1001; position: relative">
-    <div class="row awesome-header"></div>
     <div class="row justify-content-center">
         <div class="col-10 col-md-6 col-lg-4 col-xl-2 authtorization-form-container">
             <div class="row logo-container">
@@ -32,11 +31,16 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row auth-button-container">
-                    <div class="col-12">
-                        <button class="btn" (click)="whenAuthButtonClick.next()">Авторизоваться</button>
+                        <div class="row error-text-container" *ngIf="errorText">
+                            <div class="col-12">
+                                <div class="error-text">{{errorText}}</div>
+                            </div>
+                        </div>
+                        <div class="row auth-button-container">
+                            <div class="col-12">
+                                <button class="btn" (click)="whenAuthButtonClick.next()">Login</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -29,7 +29,6 @@ export class PasswordsComponent implements OnInit{
                 })})
             .map(next => next.data)
             .subscribe(next => {
-                    console.log(next);
                     this.passwords = next;
                 },
                 error => console.log(error)
