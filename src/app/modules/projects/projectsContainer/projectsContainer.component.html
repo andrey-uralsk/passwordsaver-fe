@@ -1,0 +1,6 @@
+<div class="buttons-container bg-light">
+    <projects-buttons-pane></projects-buttons-pane>
+</div>
+<div class="projects-container">
+    <project-card *ngFor="let project of projects" [project]="project"></project-card>
+</div>

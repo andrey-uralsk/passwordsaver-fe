@@ -6,15 +6,4 @@ import {Project} from "../../../core/contracts/Models/Project/Project";
     templateUrl: './projects.component.html',
     styleUrls: ['./projects.component.styl']
 })
-export class ProjectsComponent {
-    public projects: Project[] = [];
-    constructor(backend: BackendDataSource<Project>) {
-        backend.readMany({model: Project})
-            .map(next => next.data)
-            .subscribe(next => {
-                    this.projects = next;
-                },
-                error => console.log(error)
-            );
-    }
-}
+export class ProjectsComponent {}
