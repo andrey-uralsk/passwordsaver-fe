@@ -64,7 +64,7 @@ export class BackendDataSource<T extends Model> implements IDataSource<Model> {
 
     public create(createRequest: IDataSourceCreateRequest<T>): Observable<IDataSourceCreateResponse<T>> {
         const createResource: string = this.backendDataSourceMapping.dataSourceMap.get(createRequest.model);
-        return this.http.post(createResource, createRequest.data)
+        return this.http.post(`${this.backendPrefix}${createResource}`, createRequest.data)
             .map(next => {
                 let data: T = next['data'];
                 return {
@@ -75,7 +75,7 @@ export class BackendDataSource<T extends Model> implements IDataSource<Model> {
 
     public update(updateRequest: IDataSourceUpdateRequest<T>): Observable<IDataSourceUpdateResponse<T>> {
         const updateResource: string = this.backendDataSourceMapping.dataSourceMap.get(updateRequest.model);
-        return this.http.put(updateResource, updateRequest.data)
+        return this.http.put(`${this.backendPrefix}${updateResource}`, updateRequest.data)
             .map(next => {
                 let data: T = next['data'];
                 return {
@@ -86,7 +86,7 @@ export class BackendDataSource<T extends Model> implements IDataSource<Model> {
 
     public delete(deleteRequest: IDataSourceDeleteRequest<T>): Observable<IDataSourceDeleteResponse<T>> {
         const deleteResource: string = this.backendDataSourceMapping.dataSourceMap.get(deleteRequest.model);
-        return this.http.delete(deleteResource, deleteRequest.params)
+        return this.http.delete(`${this.backendPrefix}${deleteResource}`, deleteRequest.params)
             .map(next => {
                 let data: T = next['data'];
                 return {

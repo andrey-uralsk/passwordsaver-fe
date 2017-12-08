@@ -6,9 +6,11 @@ import {CommonModule} from "@angular/common";
 import {ProjectsButtonsPaneComponent} from "./projectsButtonsPane/projectsButtonsPane.component";
 import {ProjectModalComponent} from "./projectModal/projectModal.component";
 import {ProjectModalService} from "./projectModal/projectModal.service";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
     imports: [
+        FormsModule,
         RouterModule,
         CommonModule
     ],
