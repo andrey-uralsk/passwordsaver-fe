@@ -25,6 +25,7 @@ import {PasswordsComponent} from "./passwords/passwords.component";
             path: 'app',
             component: AppContainerComponent,
             canActivate: [AuthGuard],
+            canActivateChild: [AuthGuard],
             children: [{
                 path: '',
                 redirectTo: 'projects',

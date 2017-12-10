@@ -3,5 +3,5 @@ import {Type} from "@angular/core";
 
 export interface IDataSourceDeleteRequest<T extends Model> {
     model: Type<T>;
-    params?: {[param: string]: string | string[]};
+    params?: {[param: string]: string| number| boolean};
 }

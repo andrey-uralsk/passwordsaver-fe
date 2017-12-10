@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Subject} from "rxjs/Subject";
 import {Project} from "../../../../core/contracts/Models/Project/Project";
-import {BackendDataSource} from "../../../../core/modules/BackendDataSource/backendDataSource";
+import {ProjectsService} from "../projects.service";
 
 @Injectable()
 export class ProjectModalService {
@@ -9,23 +9,21 @@ export class ProjectModalService {
     public whenOpenModalWithData: Subject<Project> = new Subject<Project>();
     public saveModalData: Subject<Project> = new Subject<Project>();
 
-    constructor(
-        private backend: BackendDataSource<Project>
-    ) {
+    constructor(private projectService: ProjectsService) {
         this.whenOpenModalWithData
             .subscribe(
                 next => this.isOpenModal.next(true)
             );
         this.saveModalData
-            .switchMap(next => {
+            .do(next => {
                 if(next.id) {
-                    return this.backend.update({model: Project, data: next});
+                    this.projectService.updateProject(next);
                 } else {
-                    return this.backend.create({model: Project, data: next});
+                    this.projectService.addProject(next)
                 }
             })
-            .subscribe(
-                next => console.log(next)
-            );
+            .mapTo(false)
+            .multicast(this.isOpenModal)
+            .connect();
     }
 }

@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
-import {BackendDataSource} from "../../../../core/modules/BackendDataSource/backendDataSource";
 import {Project} from "../../../../core/contracts/Models/Project/Project";
+import {ProjectsService} from "../projects.service";
 
 @Component({
     selector: 'projects-container',
@@ -9,13 +9,12 @@ import {Project} from "../../../../core/contracts/Models/Project/Project";
 })
 export class ProjectsContainerComponent {
     public projects: Project[] = [];
-    constructor(backend: BackendDataSource<Project>) {
-        backend.readMany({model: Project})
-            .map(next => next.data)
-            .subscribe(next => {
-                    this.projects = next;
-                },
-                error => console.log(error)
-            );
+
+    constructor(private projectsService: ProjectsService) {
+        this.projectsService.projectsStream
+            .subscribe(
+                next => this.projects = next,
+            )
+        this.projectsService.getProjects();
     }
 }

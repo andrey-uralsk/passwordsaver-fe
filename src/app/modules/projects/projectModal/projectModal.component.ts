@@ -13,9 +13,9 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 })
 export class ProjectModalComponent implements OnInit{
     public isOpen: Subject<boolean>;
-    public nameValue = new BehaviorSubject<string>('');
-    public descriptionValue = new BehaviorSubject<string>('');
-    public value = new BehaviorSubject<Project>({});
+    public nameValue = new Subject<string>();
+    public descriptionValue = new Subject<string>();
+    public value = new Subject<Project>();
     public whenSaveButtonClick = new Subject<undefined>();
 
     constructor(private projectModalService: ProjectModalService) {}
@@ -31,17 +31,26 @@ export class ProjectModalComponent implements OnInit{
                 }
             );
         this.nameValue
-            .combineLatest(this.descriptionValue)
-            .map(([name, description]) => {
-                const project = this.value.getValue();
+            .withLatestFrom(this.value)
+            .map(([name, projectValue]) => {
+                const project = projectValue;
                 project.name = name;
+                return project;
+            })
+            .multicast(this.value)
+            .connect();
+        this.descriptionValue
+            .withLatestFrom(this.value)
+            .map(([description, projectValue]) => {
+                const project = projectValue;
                 project.description = description;
                 return project;
             })
             .multicast(this.value)
             .connect();
         this.whenSaveButtonClick
-            .map(() => this.value.getValue())
+            .withLatestFrom(this.value)
+            .map(next => next[1])
             .multicast(this.projectModalService.saveModalData)
             .connect();
     }

@@ -27,7 +27,7 @@ export class BackendDataSource<T extends Model> implements IDataSource<Model> {
         const readResource: string = this.backendDataSourceMapping.dataSourceMap.get(readRequest.model);
         let params = new HttpParams();
         for(let param in readRequest.params) {
-            params = params.append(param, readRequest.params[param]);
+            params = params.append(param, readRequest.params[param] as string);
         }
         return this.http
             .get(`${this.backendPrefix}${readResource}`,
@@ -48,7 +48,7 @@ export class BackendDataSource<T extends Model> implements IDataSource<Model> {
         const readResource: string = this.backendDataSourceMapping.dataSourceMap.get(readRequest.model);
         let params = new HttpParams();
         for(let param in readRequest.params) {
-            params = params.append(param, readRequest.params[param]);
+            params = params.append(param, readRequest.params[param] as string);
         }
         return this.http
             .get(`${this.backendPrefix}${readResource}`,
@@ -86,6 +86,10 @@ export class BackendDataSource<T extends Model> implements IDataSource<Model> {
 
     public delete(deleteRequest: IDataSourceDeleteRequest<T>): Observable<IDataSourceDeleteResponse<T>> {
         const deleteResource: string = this.backendDataSourceMapping.dataSourceMap.get(deleteRequest.model);
+        let params = new HttpParams();
+        for(let param in deleteRequest.params) {
+            params = params.append(param, deleteRequest.params[param] as string);
+        }
         return this.http.delete(`${this.backendPrefix}${deleteResource}`, deleteRequest.params)
             .map(next => {
                 let data: T = next['data'];

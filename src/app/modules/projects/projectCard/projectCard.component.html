@@ -2,6 +2,7 @@
     <div class="card-body">
         <h4 class="card-title">
             <a [routerLink]="'/app/passwords/' + project.id">{{project.name}}</a>
+            <i class="material-icons edit-button" (click)="editProject()">create</i>
         </h4>
         <div class="card-text">{{project.description}}</div>
     </div>
