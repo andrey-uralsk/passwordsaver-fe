@@ -8,9 +8,11 @@ import {ProjectModalComponent} from "./projectModal/projectModal.component";
 import {ProjectModalService} from "./projectModal/projectModal.service";
 import {FormsModule} from "@angular/forms";
 import {ProjectsService} from "./projects.service";
+import {ConfirmModalModule} from "../confirmModal/confirmModal.module";
 
 @NgModule({
     imports: [
+        ConfirmModalModule,
         FormsModule,
         RouterModule,
         CommonModule
