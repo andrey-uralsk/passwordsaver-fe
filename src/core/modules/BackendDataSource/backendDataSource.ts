@@ -63,6 +63,7 @@ export class BackendDataSource<T extends Model> implements IDataSource<Model> {
     }
 
     public create(createRequest: IDataSourceCreateRequest<T>): Observable<IDataSourceCreateResponse<T>> {
+        console.log(createRequest);
         const createResource: string = this.backendDataSourceMapping.dataSourceMap.get(createRequest.model);
         return this.http.post(`${this.backendPrefix}${createResource}`, createRequest.data)
             .map(next => {
