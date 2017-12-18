@@ -13,15 +13,24 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 })
 export class ProjectModalComponent implements OnInit{
     public isOpen: Subject<boolean>;
-    public nameValue = new Subject<string>();
-    public descriptionValue = new Subject<string>();
-    public value = new Subject<Project>();
+    public nameValue = new BehaviorSubject<string>('');
+    public descriptionValue = new BehaviorSubject<string>('');
+    public value = new BehaviorSubject<Project>({});
     public whenSaveButtonClick = new Subject<undefined>();
 
     constructor(private projectModalService: ProjectModalService) {}
 
     ngOnInit(): void {
         this.isOpen = this.projectModalService.isOpenModal;
+        this.isOpen
+            .filter(next => !next)
+            .subscribe(
+                next => {
+                    this.value.next({});
+                    this.nameValue.next('');
+                    this.descriptionValue.next('');
+                }
+            );
         this.projectModalService.whenOpenModalWithData
             .subscribe(
                 next => {

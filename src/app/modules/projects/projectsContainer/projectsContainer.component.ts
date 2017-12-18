@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {Project} from "../../../../core/contracts/Models/Project/Project";
 import {ProjectsService} from "../projects.service";
+import {Subject} from "rxjs/Subject";
 
 @Component({
     selector: 'projects-container',
@@ -8,13 +9,10 @@ import {ProjectsService} from "../projects.service";
     styleUrls: ['./projectsContainer.component.styl']
 })
 export class ProjectsContainerComponent {
-    public projects: Project[] = [];
+    public projects: Subject<Project[]>;
 
     constructor(private projectsService: ProjectsService) {
-        this.projectsService.projectsStream
-            .subscribe(
-                next => this.projects = next,
-            )
+        this.projects = projectsService.projectsStream;
         this.projectsService.getProjects();
     }
 }

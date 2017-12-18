@@ -2,5 +2,7 @@
     <projects-buttons-pane></projects-buttons-pane>
 </div>
 <div class="projects-container">
-    <project-card *ngFor="let project of projects" [project]="project"></project-card>
+    <project-card *ngFor="let project of projects | async" [project]="project"></project-card>
 </div>
+<project-modal></project-modal>
+<confirm-modal></confirm-modal>

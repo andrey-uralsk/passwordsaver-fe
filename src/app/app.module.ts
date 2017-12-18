@@ -4,7 +4,6 @@ import { BrowserModule }  from '@angular/platform-browser';
 import {RootComponent} from "./components/root/root.component";
 import {RouterModule, Routes} from "@angular/router";
 import {AuthorizationModule} from "./modules/authorization/authorization.module";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {BackendSourceModule} from "../core/modules/BackendDataSource/backendSource.module";
 
 @NgModule({
